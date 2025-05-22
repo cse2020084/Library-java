@@ -1,5 +1,9 @@
+import config.LibraryConfig;
+
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Welcome to Library Management System!");
+        LibraryConfig libraryConfig=new LibraryConfig();
+        libraryConfig.getLibraryController().run();
     }
 }
