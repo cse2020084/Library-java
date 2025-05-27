@@ -28,7 +28,8 @@ public class LibraryController {
                     break;
                 case 2:
                     String bookId=this.inputProvider.inputToGetBookById();
-                    this.bookServiceInterface.getBookById(bookId);
+                    Book getbook=this.bookServiceInterface.getBookById(bookId);
+                    if(getbook!=null) System.out.println("The Book is granted to you as titled.. ' "+getbook.getBookTitle()+" ' by author - ' "+getbook.getAuthorName()+" '");
                     break;
                 case 3:
                     System.out.println("Exiting...");

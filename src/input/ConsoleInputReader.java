@@ -13,7 +13,12 @@ public class ConsoleInputReader implements InputReader {
     @Override
     public String readString(String prompt) {
         System.out.println(prompt);
-        return scanner.nextLine();
+        String res= scanner.nextLine().trim();
+        return res;
     }
+
+
+
+
     
 }
