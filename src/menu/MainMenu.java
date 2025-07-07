@@ -1,7 +1,7 @@
 package menu;
 
-public class MainMenu {
-    public void printMenu(){
+public class MainMenu implements LibraryMenuInterface{
+    public void printMainMenu(){
         System.out.println("\n---Menu ---");
         System.out.println("1. Student");
         System.out.println("2. Member");

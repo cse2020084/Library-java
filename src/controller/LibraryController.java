@@ -2,18 +2,28 @@ package controller;
 
 import input.InputProvider;
 import menu.LibraryMenu;
+import menu.LibraryMenuInterface;
+import menu.MainMenu;
 import model.Book;
 import service.interfaces.BookServiceInterface;
 
-public class LibraryController {
-    private final LibraryMenu libraryMenu;
-    private final BookServiceInterface bookServiceInterface;
+/*
+ *  Role of controller
+ * Controls application flow, handles user inputs, and delegates to appropriate services or sub-controllers.
+ * You are following an MVC-style structure — which is good and used everywhere (CLI, web, desktop, APIs).
+ */
+
+public class LibraryController implements LibraryControllerInterface {
+    private final LibraryMenuInterface libraryMenu;
+    private final LibraryControllerInterface memberController;
+    private final LibraryControllerInterface studentController;
     private final InputProvider inputProvider;
     
-    public LibraryController(LibraryMenu libraryMenu,BookServiceInterface bookServiceInterface,InputProvider inputProvider){
+    public LibraryController(LibraryMenuInterface libraryMenu,InputProvider inputProvider,LibraryControllerInterface memberController,LibraryControllerInterface studentController){
         this.libraryMenu=libraryMenu;
-        this.bookServiceInterface=bookServiceInterface;
         this.inputProvider=inputProvider;
+        this.memberController=memberController;
+        this.studentController=studentController;
     }
 
     public void run(){
@@ -23,13 +33,12 @@ public class LibraryController {
             int choice=this.inputProvider.inputForChoice();
             switch (choice) {
                 case 1:
-                    Book book=this.inputProvider.inputToAddNewBook();
-                    this.bookServiceInterface.addNewBookById(book);
+                    studentController.run();
+                    this.libraryMenu.printMainMenu();
                     break;
                 case 2:
-                    String bookId=this.inputProvider.inputToGetBookById();
-                    Book getbook=this.bookServiceInterface.getBookById(bookId);
-                    if(getbook!=null) System.out.println("The Book is granted to you as titled.. ' "+getbook.getBookTitle()+" ' by author - ' "+getbook.getAuthorName()+" '");
+                    memberController.run();
+                    this.libraryMenu.printMainMenu();
                     break;
                 case 3:
                     System.out.println("Exiting...");
